@@ -1,0 +1,123 @@
+﻿<Window x:Class="Football_App.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Football_App.ViewModel"
+        xmlns:menu="clr-namespace:Football_App.Utilities"
+        mc:Ignorable="d"
+        Title="Футбольный менеджер"
+        Height="800"
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+
+    <Window.DataContext>
+        <vm:NavigationVM />
+    </Window.DataContext>
+    
+    <Grid>
+
+        <!--// Бэкграунд окна //-->
+        <Border Background="#212529"/>
+
+        <Grid>
+
+            <!--// Основное поле //-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="622" />
+            </Grid.ColumnDefinitions>
+
+            <!--// Навигационная панель //-->
+            <Grid HorizontalAlignment="Left"
+                  Width="250">
+
+                <Border Background="#272B2F"/>
+
+                <StackPanel Height="400"
+                            Width="250">
+
+                    <!--// Главная //-->
+                    <menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding HomeCommand}"
+                              IsChecked="True">
+
+                        <Grid>
+
+                            <Image Source="/Resources/Images/img_home.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Главная"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </menu:Btn>
+
+                    <!--// Клубы //-->
+                    <menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding ClubsCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Resources/Images/img_clubs.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Футбольные клубы"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </menu:Btn>
+
+                    <!--// Футболисты //-->
+                    <menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding PlayersCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Resources/Images/img_player.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Футболисты"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </menu:Btn>
+
+                    <!--// Болельщики //-->
+                    <menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding FansCommand}">
+
+                        <Grid>
+
+                            <Image Source="/Resources/Images/img_player.png"
+                                   Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Болельщики"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+
+                    </menu:Btn>
+
+
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+
+                <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}" />
+
+            </Grid>
+
+        </Grid>
+        
+    </Grid>
+
+
+</Window>

@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Football_App.ViewModel"
+                    xmlns:view="clr-namespace:Football_App.View">
+
+    <!--Шаблоны ресурсов-->
+    <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <view:Home />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ClubVM}">
+        <view:Clubs />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:FanVM}">
+        <view:Fans />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:PlayerVM}">
+        <view:Players />
+    </DataTemplate>
+
+</ResourceDictionary>

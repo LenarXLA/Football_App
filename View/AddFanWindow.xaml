@@ -1,0 +1,87 @@
+﻿<Window x:Class="Football_App.View.AddFanWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:validationRules="clr-namespace:Football_App.Utilities.ValidationRules"
+        mc:Ignorable="d"
+        Title="Добавление нового болельщика" 
+        Height="150"
+        Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    
+    <Grid>
+        <!--// Бэкграунд окна //-->
+        <Border Background="#212529"/>
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            
+            <TextBlock Text="ФИО болельщика:"
+                       Style="{StaticResource Text_Style}" />
+            <TextBox Name="FanNameBox" 
+                     Grid.Row="1" 
+                     Margin="20 0 20 0"
+                     MinWidth="200"
+                     Style="{StaticResource ValidationStyle}">
+                <TextBox.Text>
+                    <Binding Path="FanName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationRules:MainNameValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <WrapPanel Grid.Row="2" 
+                       HorizontalAlignment="Right" 
+                       Margin="0,15,0,0">
+                <Button IsDefault="True"
+                        Command="{Binding AddFanCommand}"
+                        MinWidth="60" 
+                        Margin="0,0,10,0"
+                        Padding="5"
+                        Background="Gold"
+                        Content="OK">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding
+                                             ElementName=FanNameBox, 
+                                             Path=(Validation.HasError)}"
+                                             Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            
+                <Button IsCancel="True" 
+                        MinWidth="60"
+                        Padding="5"
+                        Background="Crimson"
+                        Content="Отмена">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            
+            </WrapPanel>
+
+        </Grid>
+    </Grid>
+</Window>

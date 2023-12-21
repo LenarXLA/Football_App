@@ -1,0 +1,131 @@
+﻿<Window x:Class="Football_App.View.AddPlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:validationRules="clr-namespace:Football_App.Utilities.ValidationRules"
+        mc:Ignorable="d"
+        Title="Добавление нового игрока" 
+        Height="350"
+        Width="600"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <Grid>
+        <!--// Бэкграунд окна //-->
+        <Border Background="#212529"/>
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="25" />
+                
+                <RowDefinition Height="35" />
+                <RowDefinition Height="45" />
+                
+                <RowDefinition Height="35" />
+                <RowDefinition Height="45" />
+                
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            
+            <TextBlock Text="ФИО футболиста:"
+                       Style="{StaticResource Text_Style}" />
+            <TextBox Name="PlayerNameBox" 
+                     Grid.Row="1" 
+                     Margin="20 0 20 0"
+                     MinWidth="250"
+                     Style="{StaticResource ValidationStyle}">
+                <TextBox.Text>
+                    <Binding Path="PlayerName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationRules:MainNameValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Text="Дата рождения:"
+                       Style="{StaticResource Text_Style}" 
+                       Margin="70 20 20 0"
+                       Grid.Row="2"/>
+            <DatePicker Name="PlayerBirthdayBox"
+                        Grid.Row="3"
+                        SelectedDate="{Binding PlayerBirthday}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="20 0 0 0"
+                        Width="200"
+                        SelectedDateFormat="Short" >
+            </DatePicker>
+            
+            <TextBlock Text="СНИЛС:"
+                       Style="{StaticResource Text_Style}" 
+                       Margin="70 20 20 0"
+                       Grid.Row="4"/>
+            <TextBox Name="PlayerSNILSBox"
+                     Margin="20 20 20 0"
+                     Grid.Row="5"
+                     MinWidth="250"
+                     Style="{StaticResource ValidationStyle}">
+                <TextBox.Text>
+                    <Binding Path="PlayerSNILS" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationRules:MainNameValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <WrapPanel Grid.Row="6" 
+                       HorizontalAlignment="Right" 
+                       Margin="0,15,0,0">
+                <Button IsDefault="True"
+                        Command="{Binding AddPlayerCommand}"
+                        MinWidth="60" 
+                        Margin="0,0,10,0"
+                        Padding="5"
+                        Background="Gold"
+                        Content="OK" >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding
+                                             ElementName=PlayerNameBox, 
+                                             Path=(Validation.HasError)}"
+                                             Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding
+                                             ElementName=PlayerSNILSBox, 
+                                             Path=(Validation.HasError)}"
+                                             Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            
+                <Button IsCancel="True" 
+                        MinWidth="60"
+                        Padding="5"
+                        Background="Crimson"
+                        Content="Отмена">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            
+            </WrapPanel>
+
+        </Grid>
+    </Grid>
+</Window>

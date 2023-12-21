@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style x:Key="ListBox_Style"
+           TargetType="{x:Type ListBoxItem}">
+
+        <Setter Property="Background" Value="LightSteelBlue"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Padding" Value="3"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="Peru"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+    
+</ResourceDictionary>
